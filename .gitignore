@@ -16,7 +16,9 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+#test
 WebApplication/app
+
 
 # Roslyn cache directories
 *.ide/
