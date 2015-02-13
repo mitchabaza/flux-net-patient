@@ -1,6 +1,5 @@
 ﻿using System;
-using Newtonsoft.Json;
-
+ 
 namespace WebService.Models
 {
     public class PatientViewModel
