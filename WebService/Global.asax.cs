@@ -30,7 +30,7 @@ namespace WebService
         private void AutofacInit()
         {
             var container = new ContainerBuilder();
-            container.RegisterAssemblyTypes(typeof (CrappyPatientService).Assembly).AsImplementedInterfaces().AsSelf().InstancePerDependency();
+            container.RegisterAssemblyTypes(typeof (FakePatientService).Assembly).AsImplementedInterfaces().AsSelf().InstancePerDependency();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container.Build()));
          
              

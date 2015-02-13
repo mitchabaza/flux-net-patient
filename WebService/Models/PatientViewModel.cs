@@ -11,6 +11,8 @@ namespace WebService.Models
         public string MRN { get; set; }
         public string AdmitDate { get; set; }
         public string SSN { get; set; }
+        public string Weight { get; set; }
+        public string Height { get; set; }
 
     }
 }

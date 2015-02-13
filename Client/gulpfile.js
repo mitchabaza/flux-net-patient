@@ -5,6 +5,7 @@ var browserify = require('browserify');
 var watchify = require('watchify');
 var reactify = require('reactify');
 var concat = require('gulp-concat');
+var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 
 gulp.task('browserify', function () {
@@ -20,11 +21,17 @@ gulp.task('browserify', function () {
     .on('update', function () { // When any files update
         var updateStart = Date.now();
         console.log('Updating!');
-        watcher.bundle().pipe(source('bundle.js')).pipe(gulp.dest('../WebApplication/app/js'));
+        watcher.bundle().pipe(source('bundle.js'))
+        .pipe(buffer())// <----- convert from streaming to buffered vinyl file object
+    //    .pipe(uglify())
+        .pipe(gulp.dest('../WebApplication/app/js'));
         console.log('Updated!', (Date.now() - updateStart) + 'ms');
     })
-    .bundle()// Create the initial bundle when starting the task
+    .bundle()
     .pipe(source('bundle.js'))
+    .pipe(buffer())// <----- convert from streaming to buffered vinyl file object
+   // .pipe(uglify())
+    // Create the initial bundle when starting the task
     .pipe(gulp.dest('../WebApplication/app/js'));
 });
 

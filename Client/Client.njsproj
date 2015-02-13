@@ -30,25 +30,28 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="app\js\actions\formActions.js" />
     <Compile Include="app\js\app.js" />
+    <Compile Include="app\js\constants\formConstants.js" />
     <Compile Include="app\js\constants\patientConstants.js" />
     <Compile Include="app\js\dispatcher\appDispatcher.js" />
+    <Compile Include="app\js\mixins\StoreListenerMixin.js" />
     <Compile Include="app\js\shims\console.js" />
     <Compile Include="app\js\shims\es5-sham.min.js" />
     <Compile Include="app\js\shims\es5-shim.min.js" />
+    <Compile Include="app\js\stores\FormStore.js" />
     <Compile Include="app\js\stores\patientStore.js" />
-    <Compile Include="app\js\stores\patientStore2.js" />
-    <Compile Include="app\js\utils\serviceClient.js" />
+    <Compile Include="app\js\api\formService.js" />
+    <Compile Include="app\js\api\patientService.js" />
     <Compile Include="app\js\__tests__\Input-tests.js" />
     <Compile Include="app\js\__tests__\preProcessor.js" />
     <Compile Include="app\js\__tests__\sum-tests.js" />
-    <Compile Include="gulpfile2.js" />
+    <Compile Include="gulpfile.js" />
     <Compile Include="server.js" />
     <Content Include="app\css\main.css" />
-    <Content Include="app\css\bootstrap.css" />
     <Content Include="app\js\actions\patientActions.js" />
     <Content Include="app\js\components\app.jsx" />
-    <Content Include="app\js\components\form.jsx" />
+    <Content Include="app\js\components\fields.jsx" />
     <Content Include="app\js\components\patient.jsx" />
     <Content Include="app\js\components\patientSearch.jsx" />
     <Content Include="app\js\components\patientSearchResults.jsx" />
@@ -65,7 +68,8 @@
     <Folder Include="app\js\constants\" />
     <Folder Include="app\js\dispatcher\" />
     <Folder Include="app\js\modules\" />
-    <Folder Include="app\js\utils\" />
+    <Folder Include="app\js\api\" />
+    <Folder Include="app\js\mixins\" />
     <Folder Include="app\js\shims\" />
     <Folder Include="app\js\stores\" />
     <Folder Include="app\js\__tests__\" />

@@ -1,35 +1,33 @@
 ﻿var React = require("React");
 var Form = require("./ssi.jsx") 
-var Store= require("../Stores/PatientStore.js") 
-
+var PatientStore= require("../Stores/PatientStore.js") 
+var FieldStore= require("../Stores/PatientStore.js") 
+var createStoreMixin = require('../mixins/StoreListenerMixin')
  
 
 
-var patientSearch = React.createClass({
+var app = React.createClass({
+	mixins: [createStoreMixin(FieldStore, PatientStore)],
 
-	getInitialState:function(){
-		return {selectedPatient:null} 
-	},
-	componentDidMount: function() {
-        Store.addChangeListener(this._onChange);
-    },
-    componentWillUnmount: function() {
-        Store.removeChangeListener(this._onChange);
-    },
-	 _onChange: function() {
-        this.setState({selectedPatient:Store.getSelectedPatient()});
-    },
     render: function() {
          return (
 		<div>
-			<Form selectedPatient={this.state.selectedPatient}/>
+			<Form {...this.state}/>
 			
         </div>);
-    }
+    },
+
+
+	getStateFromStores:function() {
+		return {
+		form: FieldStore.getState(),
+		selectedPatient:PatientStore.getSelectedPatient()
+		};
+	}
 
 })
 
-module.exports = patientSearch ;
+module.exports = app ;
 
 
 

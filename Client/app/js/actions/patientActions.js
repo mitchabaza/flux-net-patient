@@ -1,6 +1,6 @@
 ﻿var AppDispatcher = require('../dispatcher/AppDispatcher');
 var Constants = require('../constants/patientConstants');
-var ServiceClient = require("../utils/ServiceClient.js");
+var ServiceClient = require("../api/patientService.js");
 // Define action methods
 var Actions = {
      

@@ -1,7 +1,6 @@
 ﻿var AppDispatcher = require('../dispatcher/AppDispatcher');
 var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/patientConstants');
-var Client = require("../utils/serviceClient.js");
 var _ = require("lodash");
 //private state
 var _data=[];

@@ -2,10 +2,11 @@
 var Actions = require("../actions/patientActions.js") 
 var PatientSearchResults = require("./patientSearchResults.jsx")
 var PatientSearchStore = require("../stores/patientStore.js")
-
-
+var OverlayMixin = require('react-bootstrap').OverlayMixin; 
+var Modal = require('react-bootstrap').Modal;
+ 
 var PatientSearch = React.createClass({
-    
+     mixins: [OverlayMixin],
 	componentDidMount:function(){
 	    PatientSearchStore.addChangeListener(this._onChange);
 
@@ -19,9 +20,12 @@ var PatientSearch = React.createClass({
     },
 
 	getInitialState: function(){
-		return {patients:[],sort:{column:"", dir:""},showSearch:true};
+		return {patients:[],sort:{column:"", dir:""},isModalOpen:false};
 	},
-
+	renderOverlay: function () {
+     
+      return <span/>; 
+    },
 	handleSort:function(column){
 
 	var sortDir;
@@ -48,10 +52,15 @@ var PatientSearch = React.createClass({
 		this.setState({sort:{column:column, dir:sortDir}});
 
 	},
-	handleSelectPatient:function(){
-		this.setState({showSearch:!this.state.showSearch})
+	handleSelectPatient:function(patient){
+		this.setState({isModalOpen:false})
+		Actions.select(patient);
 	
 	},
+	handleClose:function(){
+		this.setState({isModalOpen:false});
+	},
+
     handleSearch:function(e){
 	 
 	if (e.keyCode!=undefined){
@@ -59,37 +68,45 @@ var PatientSearch = React.createClass({
 			if(code != 13) {
 			   return;
 			}
+			this.setState({isModalOpen:true});
 			Actions.search(this.refs.searchText.getDOMNode().value)
+			
 		}
 	else{
+			this.setState({isModalOpen:true});
 			Actions.search(this.refs.searchText.getDOMNode().value)
 		}
 	},
     render: function() {
-	
-		var show=this.state.showSearch?"none":"block";
-		var divStyle = {
-			display:  show
-		};
-         return (
-		<div>
-		 <div className="row" onClick={this.handleSelectPatient}>{this.props.selectedPatient==null?"Select a":"Change"} patient...</div>
-		 <div className="row" style={divStyle}>
-            <div id="imaginary_container"> 
-                <div className="input-group stylish-input-group">
-                    <input ref="searchText" type="text" onKeyPress={this.handleSearch} className="form-control" placeholder="Search"/>
-                    <span className="input-group-addon">
-                        <button onClick={this.handleSearch} type="button">                        
-						    <span className="icon icon-search"></span>
-                        </button>  
-                    </span>
-                </div>			
-            </div>
-        </div>
-	 
-   <PatientSearchResults onSort={this.handleSort} patients={this.state.patients} sortState={this.state.sort} />
-	</div>
- )
+	var modal=null;
+	var self=this;
+	if (this.state.isModalOpen){
+		modal=
+		<Modal title="Select Patient" animation={false} onRequestHide={this.handleClose}  >
+			<div className="modal-body">
+				<PatientSearchResults onSort={this.handleSort} patients={this.state.patients} onPatientSelected={this.handleSelectPatient} sortState={this.state.sort} />
+			</div>
+			 <div className="modal-footer">
+				<button onClick={this.handleClose} >Close</button>
+			  </div>
+			</Modal>
+	}
+	return (
+	<div className="row">
+	<h3>Patient</h3>
+		<div id="custom-search-input">
+			<div className="input-group col-md-12">
+				<input ref="searchText"  type="text" className="  search-query form-control" placeholder="Search for patient..."/>
+				<span className="input-group-btn">
+					<button onClick={this.handleSearch} className="btn btn-danger" type="button">
+						<span className=" icon icon-search"></span>
+					</button>
+				</span>
+			</div>
+		</div>
+		
+	{modal} 
+	</div>)
     }
 
 })

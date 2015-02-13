@@ -3,19 +3,19 @@
 var React = require("React");
 var Actions = require("../actions/patientActions.js");
 
-var patientSearchResults = React.createClass({
-
-	
+ var patientSearchResults = React.createClass({
+ 
 	handleSort:function(e) {
 	    this.props.onSort(e);
 	},
 
 	handleSelect:function(patient) {
 
-		Actions.select(patient);
-
+		this.props.onPatientSelected(patient)
+	
 	},
     render: function() {
+
 
 		var rows=[];
 		var columnNames=[];
@@ -60,7 +60,8 @@ columnNames.forEach(function(columnName){
 	if (rows.length>0)
 		{
 			return(
-			<div>
+			
+	<div>
 				   <table id="patientSearchResults" className="table table-striped">
 					<thead>
 					  <tr>
@@ -70,9 +71,8 @@ columnNames.forEach(function(columnName){
 					<tbody>
 					 {rows}
 					</tbody>
-				  </table>
-			   		
-			</div>   
+				  </table>	
+			</div>      
 			);}      
 		return (<div className="row"/>)
     }
