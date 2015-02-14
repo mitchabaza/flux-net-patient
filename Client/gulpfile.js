@@ -1,3 +1,4 @@
+/// <vs AfterBuild='default:browserify, default:css' />
 
 var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
