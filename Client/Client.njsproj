@@ -36,6 +36,8 @@
     <Compile Include="app\js\constants\patientConstants.js" />
     <Compile Include="app\js\dispatcher\appDispatcher.js" />
     <Compile Include="app\js\mixins\StoreListenerMixin.js" />
+    <Compile Include="app\js\modules\ModuleWithoutProto.js" />
+    <Compile Include="app\js\modules\ModuleWithProto.js" />
     <Compile Include="app\js\shims\console.js" />
     <Compile Include="app\js\shims\es5-sham.min.js" />
     <Compile Include="app\js\shims\es5-shim.min.js" />

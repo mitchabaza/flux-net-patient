@@ -5,6 +5,7 @@ var _ = require("lodash");
 //private state
 var _fields = {};
 
+//set default value
 _fields['Location'] = 'Knee';
  
  var FormStore = _.extend(EventEmitter.prototype, {

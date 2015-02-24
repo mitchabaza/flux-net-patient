@@ -1,17 +1,20 @@
-﻿jest.dontMock('../components/Input.jsx');
+﻿jest.dontMock('../modules/ModuleWithProto.js');
 
 var React = require('react/addons'),  
-    Input = require('../components/Input.jsx'),
+    Input = require('../modules/ModuleWithProto.jsx'),
     TestUtils = React.addons.TestUtils;
 
-describe('Checkout', function () {
+describe('square', function () {
     it('renders each item as a li', function () {
         
-        var element = TestUtils.renderIntoDocument(<Input/>);
-        var items = TestUtils.scryRenderedDOMComponentsWithTag(element , 'input');
         
-        expect(items.length).toEqual(2);
-
+        // you can use `new` keyword
+        var s = new Square(5);
+        s.area(); // 25
+        expect(s.area).toEqual(25);
+ 
     });
  
 });
+
+
