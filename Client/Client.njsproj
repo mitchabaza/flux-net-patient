@@ -19,7 +19,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ProjectFiles</ProjectView>
+    <ProjectView>ShowAllFiles</ProjectView>
     <NodejsPort>1337</NodejsPort>
     <StartWebBrowser>true</StartWebBrowser>
   </PropertyGroup>
@@ -48,7 +48,10 @@
     <Compile Include="app\js\__tests__\sum-tests.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="server.js" />
-    <Content Include="app\css\main.css" />
+    <Content Include="assets\css\main.css" />
+    <Content Include="assets\img\glyphicons-halflings-white.png" />
+    <Content Include="assets\img\glyphicons-halflings.png" />
+    <Content Include="css\main.css" />
     <Content Include="app\js\actions\patientActions.js" />
     <Content Include="app\js\components\app.jsx" />
     <Content Include="app\js\components\fields.jsx" />
@@ -56,13 +59,16 @@
     <Content Include="app\js\components\patientSearch.jsx" />
     <Content Include="app\js\components\patientSearchResults.jsx" />
     <Content Include="app\js\components\ssi.jsx" />
+    <Content Include="form\app\css\main.css" />
     <Content Include="package.json" />
     <Content Include="README.md" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="app\" />
+    <Folder Include="assets\css\" />
+    <Folder Include="assets\img\" />
+    <Folder Include="form\app\" />
     <Folder Include="app\js\" />
-    <Folder Include="app\css\" />
+    <Folder Include="css\" />
     <Folder Include="app\js\actions\" />
     <Folder Include="app\js\components\" />
     <Folder Include="app\js\constants\" />
@@ -73,6 +79,11 @@
     <Folder Include="app\js\shims\" />
     <Folder Include="app\js\stores\" />
     <Folder Include="app\js\__tests__\" />
+    <Folder Include="form\" />
+    <Folder Include="form\app\css\" />
+    <Folder Include="assets\" />
+    <Folder Include="worklist\" />
+    <Folder Include="worklist\js\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>

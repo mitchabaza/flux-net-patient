@@ -1,5 +1,4 @@
-/// <vs AfterBuild='default:browserify, default:css' />
-
+/// <vs SolutionOpened='build-dev' />
 var gulp = require('gulp');
 var source = require('vinyl-source-stream'); // Used to stream bundle for further handling
 var browserify = require('browserify');
@@ -8,82 +7,103 @@ var reactify = require('reactify');
 var concat = require('gulp-concat');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
+var colors = require('colors');
+var createBundles, createBundle;
 
-var createbundler = function() {
-    
+var files = [
+    {
+        input: ['./form/app.js'],
+        output: 'worklist.js',
+        extensions: ['.js'],
+        destination: '../WebApplication/app/js/'
+    }, {
+        input: ['./worklist/app.js'],
+        output: 'form.js',
+        extensions: ['.js'],
+        destination: '../WebApplication/app/js/'
+    }
+];
+createBundle = function (options) {
+    var  rebundle;
+    var bundler = createDirtyBundle(options.input);
+   
+    rebundle = function () {
+        var startTime;
+        startTime = new Date().getTime();
+        return bundler.bundle().on('error', function () {
+            return console.log(arguments);
+        }).pipe(source(options.output)).pipe(buffer()).pipe(uglify()).pipe(gulp.dest(options.destination)).on('end', function () {
+            var time;
+            time = (new Date().getTime() - startTime) / 1000;
+            return console.log(options.output.cyan + " was browserified: " + (time + 's').magenta);
+        });
+    };
+    if (global.isWatching) {
+        bundler.on('update', rebundle);
+    }
+    return rebundle();
+};
+
+createBundles = function (bundles) {
+    return bundles.forEach(function (bundle) {
+        return createBundle({
+            input: bundle.input,
+            output: bundle.output,
+            extensions: bundle.extensions,
+            destination: bundle.destination
+        });
+    });
+};
+
+var createDirtyBundle = function(input) {
+
     var bundler = browserify({
-        entries: ['./app/js/app.js'], // Only need the root js file, browserify finds the dependencies
+        entries: [input], // Only need the root js file, browserify finds the dependencies
         transform: [reactify], // We want to convert JSX to normal javascript
         debug: false, // include sourcemapping for minified scripts?
-        cache: {}, packageCache: {}, fullPaths: true // Requirement of watchify
+        cache: {},
+        packageCache: {},
+        fullPaths: true // Requirement of watchify
     });
-    return bundler;
+    var returnVal=global.isWatching ? watchify(bundler) : bundler;
+    return returnVal;
 }
-gulp.task('js', function() {
+ 
 
-    var bundler = createbundler();
-
-    bundler.bundle()
-        .pipe(source('bundle.js'))
-        .pipe(buffer()) // <----- convert from streaming to buffered vinyl file object
-        .pipe(uglify())
-        // Create the initial bundle when starting the task
-        .pipe(gulp.dest('../WebApplication/app/js'));
-
-
-});
-
-gulp.task('js-dev', function () {
-    
-    var watcher = watchify(createbundler());
-    
-    return watcher
-    .on('update', function () { // When any files update
-        var updateStart = Date.now();
-        console.log('Updating!');
-        watcher.bundle().pipe(source('bundle.js'))
-        .pipe(buffer())// <----- convert from streaming to buffered vinyl file object
-        .pipe(gulp.dest('../WebApplication/app/js'));
-        console.log('Updated!', (Date.now() - updateStart) + 'ms');
-    })
-    .bundle()
-    .pipe(source('bundle.js'))
-    .pipe(buffer())// <----- convert from streaming to buffered vinyl file object
-   // .pipe(uglify())
-    // Create the initial bundle when starting the task
-    .pipe(gulp.dest('../WebApplication/app/js'));
-});
-
-
-var runcss = function () {
-    gulp.src('./app/css/*.css')
-            .pipe(concat('main.css'))
-            .pipe(gulp.dest('../WebApplication/app/css'));
+ 
+var runcss = function() {
+    gulp.src('./assets/css/*.css')
+        .pipe(concat('main.css'))
+        .pipe(gulp.dest('../WebApplication/assets/css'));
 };
 
-var runimages = function () {
-    gulp.src('./app/img/*.*')
-            .pipe(gulp.dest('../WebApplication/app/img'));
+var runimages = function() {
+    gulp.src('./assets/img/*.*')
+        .pipe(gulp.dest('../WebApplication/assets/img'));
 };
-gulp.task('styles', function() {
+gulp.task('bundleAssets', function() {
+    
+    var all = function() {
+        
+        runcss();
+        runimages();
+    }
 
-   
-    runcss();
-    runimages();
-
+    all();
+    if (global.isWatching) {
+        gulp.watch('./assets/**/*.*', all);
+    }
 });
-gulp.task('styles-dev', function() {
-    runcss();
+ 
 
-    gulp.watch('./app/css/*.css', runcss);
+gulp.task('setWatch', function () {
 
-    runimages();
-    gulp.watch('./app/css/*.css', runimages);
+    global.isWatching = true;
+})
+gulp.task('bundleJs', function() {
 
-});
-
+    return createBundles(files);
+})
 // Just running the two tasks
-gulp.task('build-dev', ['js-dev', 'styles-dev']);
-
-// Just running the two tasks
-gulp.task('build', ['js', 'styles']);
+gulp.task('build-dev',  [ 'setWatch','bundleJs', 'bundleAssets']);
+gulp.task('build', ['bundleJs', 'bundleAssets']);

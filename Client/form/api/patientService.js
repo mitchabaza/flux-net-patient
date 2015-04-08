@@ -9,7 +9,7 @@ var ServiceClient = {
         var actions = require("../actions/patientActions.js");
         
         Superagent
-            .post('http://localhost/webservice/patient/search?criteria=' + criteria)
+            .post('http://localhost/AmsService/patient/search?criteria=' + criteria)
             .set('Accept', 'application/json')
             .end(function(res) {
                 if (res.ok) {
