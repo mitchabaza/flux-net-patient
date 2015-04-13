@@ -17,6 +17,7 @@
     ]
   },
   "devDependencies": {
+    "babelify": "^6.0.2",
     "browserify": "^7.0.3",
     "colors": "^1.0.3",
     "flux": "^2.0.1",

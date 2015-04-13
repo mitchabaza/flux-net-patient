@@ -19,7 +19,7 @@
     <OutputPath>.</OutputPath>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
-    <ProjectView>ShowAllFiles</ProjectView>
+    <ProjectView>ProjectFiles</ProjectView>
     <NodejsPort>1337</NodejsPort>
     <StartWebBrowser>true</StartWebBrowser>
   </PropertyGroup>
@@ -30,60 +30,89 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="app\js\actions\formActions.js" />
-    <Compile Include="app\js\app.js" />
-    <Compile Include="app\js\constants\formConstants.js" />
-    <Compile Include="app\js\constants\patientConstants.js" />
-    <Compile Include="app\js\dispatcher\appDispatcher.js" />
-    <Compile Include="app\js\mixins\StoreListenerMixin.js" />
-    <Compile Include="app\js\shims\console.js" />
-    <Compile Include="app\js\shims\es5-sham.min.js" />
-    <Compile Include="app\js\shims\es5-shim.min.js" />
-    <Compile Include="app\js\stores\FormStore.js" />
-    <Compile Include="app\js\stores\patientStore.js" />
-    <Compile Include="app\js\api\formService.js" />
-    <Compile Include="app\js\api\patientService.js" />
-    <Compile Include="app\js\__tests__\Input-tests.js" />
-    <Compile Include="app\js\__tests__\preProcessor.js" />
-    <Compile Include="app\js\__tests__\sum-tests.js" />
+    <Compile Include="form\actions\formActions.js" />
+    <Compile Include="form\actions\patientActions.js" />
+    <Compile Include="form\api\formService.js" />
+    <Compile Include="form\api\patientService.js" />
+    <Compile Include="form\app.js" />
+    <Compile Include="form\constants\formConstants.js" />
+    <Compile Include="form\constants\patientConstants.js" />
+    <Compile Include="form\dispatcher\appDispatcher.js" />
+    <Compile Include="form\dispatcher\dispatcher.js" />
+    <Compile Include="form\mixins\StoreListenerMixin.js" />
+    <Compile Include="form\shims\console.js" />
+    <Compile Include="form\shims\es5-sham.min.js" />
+    <Compile Include="form\shims\es5-shim.min.js" />
+    <Compile Include="form\stores\BaseStore.js" />
+    <Compile Include="form\stores\patientStore.js" />
+    <Compile Include="form\stores\FormStore.js" />
+    <Compile Include="form\__tests__\Input-tests.js" />
+    <Compile Include="form\__tests__\preProcessor.js" />
+    <Compile Include="form\__tests__\sum-tests.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="server.js" />
+    <Compile Include="worklist\actions\formActions.js" />
+    <Compile Include="worklist\actions\patientActions.js" />
+    <Compile Include="worklist\api\formService.js" />
+    <Compile Include="worklist\api\patientService.js" />
+    <Compile Include="worklist\app.js" />
+    <Compile Include="worklist\constants\formConstants.js" />
+    <Compile Include="worklist\constants\patientConstants.js" />
+    <Compile Include="worklist\dispatcher\appDispatcher.js" />
+    <Compile Include="worklist\mixins\StoreListenerMixin.js" />
+    <Compile Include="worklist\shims\console.js" />
+    <Compile Include="worklist\shims\es5-sham.min.js" />
+    <Compile Include="worklist\shims\es5-shim.min.js" />
+    <Compile Include="worklist\stores\FormStore.js" />
+    <Compile Include="worklist\stores\patientStore.js" />
+    <Compile Include="worklist\__tests__\Input-tests.js" />
+    <Compile Include="worklist\__tests__\preProcessor.js" />
+    <Compile Include="worklist\__tests__\sum-tests.js" />
+    <Content Include="assets\css\bootstrap.css" />
+    <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\main.css" />
     <Content Include="assets\img\glyphicons-halflings-white.png" />
     <Content Include="assets\img\glyphicons-halflings.png" />
-    <Content Include="css\main.css" />
-    <Content Include="app\js\actions\patientActions.js" />
-    <Content Include="app\js\components\app.jsx" />
-    <Content Include="app\js\components\fields.jsx" />
-    <Content Include="app\js\components\patient.jsx" />
-    <Content Include="app\js\components\patientSearch.jsx" />
-    <Content Include="app\js\components\patientSearchResults.jsx" />
-    <Content Include="app\js\components\ssi.jsx" />
-    <Content Include="form\app\css\main.css" />
+    <Content Include="form\components\app.jsx" />
+    <Content Include="form\components\fields.jsx" />
+    <Content Include="form\components\patient.jsx" />
+    <Content Include="form\components\patientSearch.jsx" />
+    <Content Include="form\components\patientSearchResults.jsx" />
+    <Content Include="form\components\ssi.jsx" />
     <Content Include="package.json" />
     <Content Include="README.md" />
+    <Content Include="worklist\components\app.jsx" />
+    <Content Include="worklist\components\fields.jsx" />
+    <Content Include="worklist\components\patient.jsx" />
+    <Content Include="worklist\components\patientSearch.jsx" />
+    <Content Include="worklist\components\patientSearchResults.jsx" />
+    <Content Include="worklist\components\ssi.jsx" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="assets\css\" />
     <Folder Include="assets\img\" />
-    <Folder Include="form\app\" />
-    <Folder Include="app\js\" />
-    <Folder Include="css\" />
-    <Folder Include="app\js\actions\" />
-    <Folder Include="app\js\components\" />
-    <Folder Include="app\js\constants\" />
-    <Folder Include="app\js\dispatcher\" />
-    <Folder Include="app\js\modules\" />
-    <Folder Include="app\js\api\" />
-    <Folder Include="app\js\mixins\" />
-    <Folder Include="app\js\shims\" />
-    <Folder Include="app\js\stores\" />
-    <Folder Include="app\js\__tests__\" />
+    <Folder Include="form\actions\" />
+    <Folder Include="form\api\" />
     <Folder Include="form\" />
-    <Folder Include="form\app\css\" />
     <Folder Include="assets\" />
+    <Folder Include="form\components\" />
+    <Folder Include="form\constants\" />
+    <Folder Include="form\dispatcher\" />
+    <Folder Include="form\mixins\" />
+    <Folder Include="form\shims\" />
+    <Folder Include="form\stores\" />
+    <Folder Include="form\__tests__\" />
     <Folder Include="worklist\" />
+    <Folder Include="worklist\actions\" />
+    <Folder Include="worklist\api\" />
+    <Folder Include="worklist\components\" />
+    <Folder Include="worklist\constants\" />
+    <Folder Include="worklist\dispatcher\" />
     <Folder Include="worklist\js\" />
+    <Folder Include="worklist\mixins\" />
+    <Folder Include="worklist\shims\" />
+    <Folder Include="worklist\stores\" />
+    <Folder Include="worklist\__tests__\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
   <ProjectExtensions>

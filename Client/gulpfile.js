@@ -8,17 +8,18 @@ var concat = require('gulp-concat');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var colors = require('colors');
+var babelify = require("babelify");
 var createBundles, createBundle;
 
 var files = [
     {
         input: ['./form/app.js'],
-        output: 'worklist.js',
+        output: 'form.js',
         extensions: ['.js'],
         destination: '../WebApplication/app/js/'
     }, {
         input: ['./worklist/app.js'],
-        output: 'form.js',
+        output: 'worklist.js',
         extensions: ['.js'],
         destination: '../WebApplication/app/js/'
     }
@@ -32,7 +33,7 @@ createBundle = function (options) {
         startTime = new Date().getTime();
         return bundler.bundle().on('error', function () {
             return console.log(arguments);
-        }).pipe(source(options.output)).pipe(buffer()).pipe(uglify()).pipe(gulp.dest(options.destination)).on('end', function () {
+        }).pipe(source(options.output)).pipe(buffer()).pipe(gulp.dest(options.destination)).on('end', function () {
             var time;
             time = (new Date().getTime() - startTime) / 1000;
             return console.log(options.output.cyan + " was browserified: " + (time + 's').magenta);
@@ -56,10 +57,14 @@ createBundles = function (bundles) {
 };
 
 var createDirtyBundle = function(input) {
+    
+    var reactifyES6 = function (file) {
+        return reactify(file, { 'es6': true });
+    };
 
     var bundler = browserify({
         entries: [input], // Only need the root js file, browserify finds the dependencies
-        transform: [reactify], // We want to convert JSX to normal javascript
+        transform: [reactifyES6], // We want to convert JSX to normal javascript
         debug: false, // include sourcemapping for minified scripts?
         cache: {},
         packageCache: {},
@@ -73,7 +78,7 @@ var createDirtyBundle = function(input) {
  
 var runcss = function() {
     gulp.src('./assets/css/*.css')
-        .pipe(concat('main.css'))
+        .pipe(concat('final.css'))
         .pipe(gulp.dest('../WebApplication/assets/css'));
 };
 

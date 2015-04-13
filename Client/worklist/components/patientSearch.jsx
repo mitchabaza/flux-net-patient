@@ -12,7 +12,7 @@ var PatientSearch = React.createClass({
 
 	},
 	componentDidUnmount:function(){
-        PatientSearchStore.addChangeListener(this._onChange);
+        PatientSearchStore.removeChangeListener(this._onChange);
 	},
 	
 	_onChange: function() {
@@ -99,7 +99,7 @@ var PatientSearch = React.createClass({
 				<input ref="searchText"  type="text" className="  search-query form-control" placeholder="Search for patient..."/>
 				<span className="input-group-btn">
 					<button onClick={this.handleSearch} className="btn btn-danger" type="button">
-						<span className=" icon icon-search"></span>
+						search <span className=" icon icon-search"></span>
 					</button>
 				</span>
 			</div>

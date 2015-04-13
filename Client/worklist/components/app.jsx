@@ -1,7 +1,7 @@
 ﻿var React = require("React");
 var Form = require("./ssi.jsx") 
 var PatientStore= require("../Stores/PatientStore.js") 
-var FieldStore= require("../Stores/PatientStore.js") 
+var FieldStore= require("../Stores/FormStore.js") 
 var createStoreMixin = require('../mixins/StoreListenerMixin')
  
 

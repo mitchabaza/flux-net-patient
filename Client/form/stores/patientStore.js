@@ -1,58 +1,46 @@
-﻿var AppDispatcher = require('../dispatcher/AppDispatcher');
-var EventEmitter = require('events').EventEmitter;
-var Constants = require('../constants/patientConstants');
+﻿var Constants = require('../constants/patientConstants');
 var _ = require("lodash");
-//private state
-var _data=[];
-var _selectedPatient;
+var BaseStore = require("./BaseStore");
 
-function _selectPatient(mrn) {
-    _selectedPatient = _.find(_data, function (patient) { return patient.MRN == mrn; });
+ 
+class PatientStore extends BaseStore{
+
+constructor() {
+    super();
+    
+    this.data = { }    ;
+    this.selectedPatient =null;
+    
+    
+}
+
+_selectPatient(mrn) {
+    this._selectedPatient = _.find(this._data, function (patient) { return patient.MRN == mrn; });
      
 }
-// Extend PatientSearchStore with EventEmitter to add eventing capabilities
-var PatientSearchStore = _.extend(EventEmitter.prototype, {
-    
-    getPatients: function () {
-        return _data.map(function(item) {return {Name: item.FirstName + " " + item.LastName, MRN:item.MRN, DateOfBirth:item.DateOfBirth}});
-    },
-   
 
-    getSelectedPatient: function () {
-        return _selectedPatient;
-    },
-     
-    
-    emitChange: function () {
-        this.emit('change');
-    },
-    
-    
-    addChangeListener: function (callback) {
-        this.on('change', callback);
-    },
-    
-    
-    removeChangeListener: function (callback) {
-        this.removeListener('change', callback);
-    }
-
-});
+getPatients() {
+    return this._data.map(function (item) { return { Name: item.FirstName + " " + item.LastName, MRN: item.MRN, DateOfBirth: item.DateOfBirth } });
+}
 
 
-AppDispatcher.register(function (payload) {
+getSelectedPatient() {
+    return this._selectedPatient;
+}
+
+handleDispatch(payload) {
     var action = payload.action;
-     switch (action.actionType) {
+    switch (action.actionType) {
 
         case Constants.RECEIVE:
-            _data = action.data;
+           this._data = action.data;
             break;
         case Constants.SELECT:
-            _selectPatient(action.data);
-            _data = [];
+            this. _selectPatient(action.data);
+            this._data = [];
             break;
         case Constants.CLEAR:
-            _selectedPatient = null;
+            this._selectedPatient = null;
             break;
         
         default:
@@ -60,9 +48,17 @@ AppDispatcher.register(function (payload) {
     }
     
     // If action was responded to, emit change event
-    PatientSearchStore.emitChange();
+    this.emitChange();
     
     return true;
-});
+};
 
-module.exports = PatientSearchStore;
+
+}
+
+
+
+
+
+
+module.exports = PatientStore;

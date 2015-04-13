@@ -1,10 +1,10 @@
 ﻿var React = require("react")
 var Actions = require("../actions/patientActions.js") 
 var PatientSearchResults = require("./patientSearchResults.jsx")
-var PatientSearchStore = require("../stores/patientStore.js")
+var PatientSearchStore =  require("../stores/patientStore.js")
 var OverlayMixin = require('react-bootstrap').OverlayMixin; 
 var Modal = require('react-bootstrap').Modal;
- 
+ PatientSearchStore= new PatientSearchStore()
 var PatientSearch = React.createClass({
      mixins: [OverlayMixin],
 	componentDidMount:function(){
@@ -98,8 +98,8 @@ var PatientSearch = React.createClass({
 			<div className="input-group col-md-12">
 				<input ref="searchText"  type="text" className="  search-query form-control" placeholder="Search for patient..."/>
 				<span className="input-group-btn">
-					<button onClick={this.handleSearch} className="btn btn-danger" type="button">
-						<span className=" icon icon-search"></span>
+					<button onClick={this.handleSearch} className="btn" type="button">
+						Search 
 					</button>
 				</span>
 			</div>
