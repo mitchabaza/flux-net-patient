@@ -18,6 +18,8 @@ var Patient = React.createClass({
 						<dd>{this.props.selectedPatient.Weight}</dd>
 						<dt>Height</dt>
 						<dd>{this.props.selectedPatient.Height}</dd>
+						<dt>Age</dt>
+						<dd>{this.props.selectedPatient.Age}</dd>
 
 					</dl>
 					);

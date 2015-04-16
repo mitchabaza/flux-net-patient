@@ -2,19 +2,28 @@
 var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/patientConstants');
 var _ = require("lodash");
+var ageCalculator = require('age-calculator');
+
 //private state
 var _data=[];
 var _selectedPatient;
 
 function _selectPatient(mrn) {
     _selectedPatient = _.find(_data, function (patient) { return patient.MRN == mrn; });
-     
+    var age = ageCalculator.getAge(_selectedPatient.DateOfBirth).toString();
+    _selectedPatient = _.extend({}, _selectedPatient, { Age: age});
+
 }
 // Extend PatientSearchStore with EventEmitter to add eventing capabilities
 var PatientSearchStore = _.extend(EventEmitter.prototype, {
     
     getPatients: function () {
-        return _data.map(function(item) {return {Name: item.FirstName + " " + item.LastName, MRN:item.MRN, DateOfBirth:item.DateOfBirth}});
+ 
+  
+        return _data.map(function(item) {
+            var age = ageCalculator.getAge(item.DateOfBirth).toString();
+            return { Name: item.FirstName + " " + item.LastName, MRN: item.MRN, DateOfBirth: item.DateOfBirth, Age: age }
+        });
     },
    
 

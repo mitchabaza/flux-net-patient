@@ -6,7 +6,8 @@ var _ = require("lodash");
 var _fields = {};
 
 _fields['Location'] = 'Knee';
- 
+_fields['Readmission'] = 'checked';
+_fields['DateOfEvent'] = '2000-10-05';
  var FormStore = _.extend(EventEmitter.prototype, {
 
     emitChange: function () {

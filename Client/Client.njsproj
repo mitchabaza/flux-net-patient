@@ -30,25 +30,6 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="form\actions\formActions.js" />
-    <Compile Include="form\actions\patientActions.js" />
-    <Compile Include="form\api\formService.js" />
-    <Compile Include="form\api\patientService.js" />
-    <Compile Include="form\app.js" />
-    <Compile Include="form\constants\formConstants.js" />
-    <Compile Include="form\constants\patientConstants.js" />
-    <Compile Include="form\dispatcher\appDispatcher.js" />
-    <Compile Include="form\dispatcher\dispatcher.js" />
-    <Compile Include="form\mixins\StoreListenerMixin.js" />
-    <Compile Include="form\shims\console.js" />
-    <Compile Include="form\shims\es5-sham.min.js" />
-    <Compile Include="form\shims\es5-shim.min.js" />
-    <Compile Include="form\stores\BaseStore.js" />
-    <Compile Include="form\stores\patientStore.js" />
-    <Compile Include="form\stores\FormStore.js" />
-    <Compile Include="form\__tests__\Input-tests.js" />
-    <Compile Include="form\__tests__\preProcessor.js" />
-    <Compile Include="form\__tests__\sum-tests.js" />
     <Compile Include="gulpfile.js" />
     <Compile Include="server.js" />
     <Compile Include="worklist\actions\formActions.js" />
@@ -58,6 +39,7 @@
     <Compile Include="worklist\app.js" />
     <Compile Include="worklist\constants\formConstants.js" />
     <Compile Include="worklist\constants\patientConstants.js" />
+    <Compile Include="worklist\DateUtils.js" />
     <Compile Include="worklist\dispatcher\appDispatcher.js" />
     <Compile Include="worklist\mixins\StoreListenerMixin.js" />
     <Compile Include="worklist\shims\console.js" />
@@ -73,12 +55,6 @@
     <Content Include="assets\css\main.css" />
     <Content Include="assets\img\glyphicons-halflings-white.png" />
     <Content Include="assets\img\glyphicons-halflings.png" />
-    <Content Include="form\components\app.jsx" />
-    <Content Include="form\components\fields.jsx" />
-    <Content Include="form\components\patient.jsx" />
-    <Content Include="form\components\patientSearch.jsx" />
-    <Content Include="form\components\patientSearchResults.jsx" />
-    <Content Include="form\components\ssi.jsx" />
     <Content Include="package.json" />
     <Content Include="README.md" />
     <Content Include="worklist\components\app.jsx" />
@@ -91,24 +67,13 @@
   <ItemGroup>
     <Folder Include="assets\css\" />
     <Folder Include="assets\img\" />
-    <Folder Include="form\actions\" />
-    <Folder Include="form\api\" />
-    <Folder Include="form\" />
     <Folder Include="assets\" />
-    <Folder Include="form\components\" />
-    <Folder Include="form\constants\" />
-    <Folder Include="form\dispatcher\" />
-    <Folder Include="form\mixins\" />
-    <Folder Include="form\shims\" />
-    <Folder Include="form\stores\" />
-    <Folder Include="form\__tests__\" />
     <Folder Include="worklist\" />
     <Folder Include="worklist\actions\" />
     <Folder Include="worklist\api\" />
     <Folder Include="worklist\components\" />
     <Folder Include="worklist\constants\" />
     <Folder Include="worklist\dispatcher\" />
-    <Folder Include="worklist\js\" />
     <Folder Include="worklist\mixins\" />
     <Folder Include="worklist\shims\" />
     <Folder Include="worklist\stores\" />

@@ -6611,11 +6611,7 @@ button.close {
        
         /* IE7-8 doesn't have border-radius, so don't indent the padding */
         margin-bottom: 0;
-        -webkit-border-radius: 3px;
-        -moz-border-radius: 3px;
-        border-radius: 3px;
-        color:#D9230F;
-    }
+     }
  
     .search-query:focus + button {
         z-index: 3;   

@@ -8,6 +8,7 @@ var createStoreMixin = require('../mixins/StoreListenerMixin')
 
 var app = React.createClass({
 	mixins: [createStoreMixin(FieldStore, PatientStore)],
+	 
 
     render: function() {
          return (

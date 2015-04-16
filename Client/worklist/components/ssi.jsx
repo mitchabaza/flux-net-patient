@@ -9,7 +9,7 @@ var SSI = React.createClass({
 			<div className="row"><h3>Create SSI - {this.props.form.title}</h3></div>
 			<PatientSearch selectedPatient={this.props.selectedPatient}/>
 			<Patient selectedPatient={this.props.selectedPatient}/>
-			<Fields/> 
+			<Fields  {...this.props}/> 
 		 </div>);
 	}
 
