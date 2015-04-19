@@ -3,11 +3,17 @@ var EventEmitter = require('events').EventEmitter;
 var Constants = require('../constants/formConstants');
 var _ = require("lodash");
 //private state
-var _fields = {};
+var _fields = [
+    { key: 'Location', value: 'Knee', label: "" , type: "select" ,options: ["Knee", "Taint","Arse", "Chest"]},
+    { key: 'Readmission', value: 'checked', label: "",type:"checkbox" },
+    { key: 'Medicare', value: 'Knee', label: "" , type:"checkbox"},
+    { key: 'DateOfEvent', value: '2010-12-13', label: "Date Of Event", type: "text"  },
+    { key: 'Notes', value: '', label: "" , type: "text" },
+    {key: 'SignsAndSymptoms',value:'fever, rash, nausea',label:'Signs And Symptoms', type: "text" }
+];
 
-_fields['Location'] = 'Knee';
-_fields['Readmission'] = 'checked';
-_fields['DateOfEvent'] = '2000-10-05';
+ 
+
  var FormStore = _.extend(EventEmitter.prototype, {
 
     emitChange: function () {
@@ -22,8 +28,15 @@ _fields['DateOfEvent'] = '2000-10-05';
         this.removeListener('change', callback);
     }
     ,
-    getState:function() {
-        return { fields: _.clone(_fields), title: _fields['Location']}
+    getTitle:function() {
+        var title = _.find(_fields, function (e) {
+            return e.key == "Location";
+        });
+        return title.value;
+    },
+    getState: function () {
+        var self = this;
+        return { fields: _.clone(_fields), title: self.getTitle()}
     }
         
 });
@@ -34,7 +47,14 @@ AppDispatcher.register(function (payload) {
     switch (action.actionType) {
 
         case Constants.UPDATEFIELD:
-            _fields[action.data.key] = action.data.value;
+            var field = _fields.filter(function(e) {
+              return  e.key== action.data.key;
+            });
+           // field[0].value =  action.data.value;
+            var field2 = _.find(_fields, function(e) {
+                return e.key == action.data.key;
+            });
+            field2.value = action.data.value;
             break;
          
         default:
