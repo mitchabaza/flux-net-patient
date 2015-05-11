@@ -8,7 +8,6 @@ var concat = require('gulp-concat');
 var buffer = require('vinyl-buffer');
 var uglify = require('gulp-uglify');
 var colors = require('colors');
-var babelify = require("babelify");
 var createBundles, createBundle;
 
 var files = [
